@@ -52,6 +52,7 @@ Content-type: application/json
 
 {
    "cpu_temp": "$(cat /sys/class/thermal/thermal_zone0/temp)",
+   "fan_speed": "",
    "num_snapshots": "$numsnapshots",
    "snapshot_oldest": "$oldestsnapshot",
    "snapshot_newest": "$newestsnapshot",
