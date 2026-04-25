@@ -58,8 +58,8 @@ Content-type: application/json
 {
    "cpu_temp": "$(cat /sys/class/thermal/thermal_zone0/temp)",
    "fan_speed": "$fan_speed",
-  "external_5v": "$external_5v",
-  "rtc_batt_v": "$rtc_batt_v",
+   "external_5v": "$external_5v",
+   "rtc_batt_v": "$rtc_batt_v",
    "num_snapshots": "$numsnapshots",
    "snapshot_oldest": "$oldestsnapshot",
    "snapshot_newest": "$newestsnapshot",
