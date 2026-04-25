@@ -48,8 +48,8 @@ read -r -d ' ' ut < /proc/uptime
 
 fan_speed=$(cat /sys/devices/platform/cooling_fan/hwmon/*/fan1_input 2>/dev/null || echo "N/A")
 
-external_5v=$(vcgencmd pmic_read_adc EXT5V_V 2>/dev/null)
-rtc_batt_v=$(vcgencmd pmic_read_adc BATT_V 2>/dev/null)
+external_5v=$(sudo -n vcgencmd pmic_read_adc EXT5V_V 2>/dev/null)
+rtc_batt_v=$(sudo -n vcgencmd pmic_read_adc BATT_V 2>/dev/null)
 
 cat << EOF
 HTTP/1.0 200 OK
