@@ -865,6 +865,8 @@ video {
         <div class="status_uptime"></div>
         <div class="status_temp"></div>
         <div class="status_fan"></div>
+        <div class="status_external_5v"></div>
+        <div class="status_rtc_batt_v"></div>
         <div class="status_drives"></div>
         <div class="status_space"></div>
         <div class="status_snapshots"></div>
@@ -1723,6 +1725,22 @@ function showstatus() {
         fandiv.style.display = "inherit";
       } else{
         fandiv.style.display = "none";
+      }
+
+      var external5vdiv = document.querySelector(".status_external_5v");
+      if (statusvals.external_5v != "" && statusvals.external_5v != "N/A") {
+        external5vdiv.innerText = "External 5V: " + statusvals.external_5v;
+        external5vdiv.style.display = "inherit";
+      } else{
+        external5vdiv.style.display = "none";
+      }
+
+      var rtcbattvdiv = document.querySelector(".status_rtc_batt_v");
+      if (statusvals.rtc_batt_v != "" && statusvals.rtc_batt_v != "N/A") {
+        rtcbattvdiv.innerText = "RTC Battery: " + statusvals.rtc_batt_v;
+        rtcbattvdiv.style.display = "inherit";
+      } else{
+        rtcbattvdiv.style.display = "none";
       }
 
       var drivesdiv = document.querySelector(".status_drives");
