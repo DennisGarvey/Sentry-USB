@@ -1703,24 +1703,20 @@ const max_status_age = 4000;
 
 function update_upload_throughput() {
   var div = document.querySelector(".status_upload_throughput");
-  var request = new XMLHttpRequest();
-  request.open('GET', cachebustingurl('cgi-bin/upload_throughput.sh'));
-  request.onreadystatechange = function () {
-    if (request.readyState === 4) {
-      if (request.status === 200) {
-        var speed = parseInt(request.responseText);
-        if (!isNaN(speed)) {
-          div.style.display = "inherit";
-          var span = document.querySelector(".status_upload_throughput_info");
-          span.innerText = byteRate(speed) + " (" + bitRate(speed) + ")";
-        } else {
-          div.style.display = "none";
-        }
+  var uptimediv = document.querySelector(".status_uptime");
+  if (isElementVisible(uptimediv) || uptimediv.clientHeight == 0) {
+    readfile({url:'cgi-bin/upload_throughput.sh', callback:function(value) {
+      var speed = parseInt(value);
+      if (!isNaN(speed)) {
+        div.style.display = "inherit";
+        var span = document.querySelector(".status_upload_throughput_info");
+        span.innerText = byteRate(speed) + " (" + bitRate(speed) + ")";
+      } else {
+        div.style.display = "none";
       }
-      setTimeout(update_upload_throughput, 2000);
-    }
-  };
-  request.send();
+    }});
+  }
+  setTimeout(update_upload_throughput, 1000);
 }
 
 function updateuptimeonly() {
