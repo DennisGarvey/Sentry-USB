@@ -16,7 +16,7 @@ t1=$(get_tx_bytes)
 sleep 1
 t2=$(get_tx_bytes)
 
-let diff=t2-t1
+diff=$((t2 - t1))
 
 cat << EOF
 HTTP/1.0 200 OK
