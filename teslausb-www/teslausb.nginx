@@ -11,6 +11,11 @@ server {
     client_max_body_size 0;
     fastcgi_request_buffering off;
 
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1000;
+    gzip_types text/plain text/html text/css;
+
     location / {
         try_files $uri $uri/ =404;
         auth_basic off;
