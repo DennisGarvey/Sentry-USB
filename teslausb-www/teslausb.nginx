@@ -14,7 +14,7 @@ server {
     gzip on;
     gzip_vary on;
     gzip_min_length 1000;
-    gzip_types text/plain application/octet-stream text/html text/css;
+    gzip_types *;
 
     location / {
         try_files $uri $uri/ =404;
