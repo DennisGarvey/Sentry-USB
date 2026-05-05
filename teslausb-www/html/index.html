@@ -1040,8 +1040,8 @@ video {
         <label for="altui">Use alternative web interface</label>
       </div>
       <div style="width:100%;padding:10px">
-        <input type="checkbox" id="preloadvideoclips" name="preloadvideoclips" value="1" checked>
-        <label for="preloadvideoclips">Preload video clips</label>
+        <input type="checkbox" id="disablepreloadvideoclips" name="disablepreloadvideoclips" value="1">
+        <label for="disablepreloadvideoclips">Disable preloading video clips</label>
       </div>
       <div style="text-align:right;padding-top:30px;">
         <button onclick="cancelsettings()">Cancel</button> <button onclick="confirmsettings()">OK</button>
@@ -1930,8 +1930,8 @@ function initialize() {
 function showsettings() {
   var altui = document.getElementById('altui');
   altui.checked = (localStorageGet("usealtui") == "true");
-  var preloadvideoclips = document.getElementById('preloadvideoclips');
-  preloadvideoclips.checked = (localStorageGet("preloadvideoclips") == "true");
+  var disablepreloadvideoclips = document.getElementById('disablepreloadvideoclips');
+  disablepreloadvideoclips.checked = (localStorageGet("disablepreloadvideoclips") == "true");
   var overlay = document.getElementById("settingsoverlay");
   overlay.style.display = "block";
 }
@@ -1952,8 +1952,8 @@ function confirmsettings() {
     document.location.replace('/new/?source=legacy');
     nonExistentFunction();
   }
-  var preloadvideoclips = document.getElementById('preloadvideoclips').checked;
-  localStorageSet("preloadvideoclips", preloadvideoclips);
+  var disablepreloadvideoclips = document.getElementById('disablepreloadvideoclips').checked;
+  localStorageSet("disablepreloadvideoclips", disablepreloadvideoclips);
   closesettings();
 }
 
@@ -2973,7 +2973,7 @@ readfile({url:'cgi-bin/videolist.sh', callback:function(value) {
     }
   }
   if (newestsequence != undefined) {
-    if (localStorageGet("preloadvideoclips") == "true") {
+    if (localStorageGet("disablepreloadvideoclips") != "true") {
       newestsequence.select();
     }
   }
