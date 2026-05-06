@@ -1707,11 +1707,12 @@ function update_upload_throughput() {
   var uptimediv = document.querySelector(".status_uptime");
   if (isElementVisible(uptimediv) || uptimediv.clientHeight == 0) {
     readfile({url:'cgi-bin/network_tx_bytes.sh', callback:function(value) {
-      var tx_bytes = parseInt(value);
-      if (!isNaN(tx_bytes)) {
-        var now = Date.now();
+      var parts = value.trim().split(/\s+/);
+      var sample_ms = parseInt(parts[0]);
+      var tx_bytes = parseInt(parts[1]);
+      if (!isNaN(sample_ms) && !isNaN(tx_bytes)) {
         if (last_tx_bytes_sample != undefined) {
-          var elapsed_ms = now - last_tx_bytes_sample.retrieved;
+          var elapsed_ms = sample_ms - last_tx_bytes_sample.sample_ms;
           var delta_bytes = tx_bytes - last_tx_bytes_sample.tx_bytes;
           if (elapsed_ms > 0 && delta_bytes >= 0) {
             var speed = (delta_bytes * 1000) / elapsed_ms;
@@ -1722,7 +1723,7 @@ function update_upload_throughput() {
             div.style.display = "none";
           }
         }
-        last_tx_bytes_sample = {tx_bytes: tx_bytes, retrieved: now};
+        last_tx_bytes_sample = {tx_bytes: tx_bytes, sample_ms: sample_ms};
       } else {
         div.style.display = "none";
         last_tx_bytes_sample = undefined;

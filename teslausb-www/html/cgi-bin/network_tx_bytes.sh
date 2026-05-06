@@ -13,11 +13,12 @@ get_tx_bytes() {
 }
 
 tx_bytes=$(get_tx_bytes)
+sample_ms=$(date +%s%3N)
 
 cat << EOF
 HTTP/1.0 200 OK
 Content-type: text/plain
 
-${tx_bytes}
+${sample_ms} ${tx_bytes}
 EOF
 
