@@ -12,16 +12,13 @@ get_tx_bytes() {
     echo $total
 }
 
-t1=$(get_tx_bytes)
-sleep 1
-t2=$(get_tx_bytes)
-
-diff=$((t2 - t1))
+tx_bytes=$(get_tx_bytes)
+sample_ms=$(date +%s%3N)
 
 cat << EOF
 HTTP/1.0 200 OK
 Content-type: text/plain
 
-${diff}
+${sample_ms} ${tx_bytes}
 EOF
 
